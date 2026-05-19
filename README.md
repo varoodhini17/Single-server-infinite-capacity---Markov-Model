@@ -1,8 +1,8 @@
 # Single server with infinite capacity (M/M/1):(oo/FIFO)
-## Aim :
+# Aim :
 To find (a) average number of materials in the system (b) average number of materials in the conveyor (c) waiting time of each material in the system (d) waiting time of each material in the conveyor, if the arrival  of materials follow poisson process with the mean interval time 12 seconds, serivice time of lathe machine follows exponential distribution with mean serice time 1 second and average service time of robot is 7seconds.
 
-## Software required :
+# Software required :
 Visual components and Python
 
 ## Theory:
@@ -23,9 +23,43 @@ This is a queuing model in which the arrival is Marcovian and departure distribu
 
  
 ## Program
-![image](https://github.com/ramjan1729/Single-server-infinite-capacity---Markov-Model/assets/103921593/5f1fd58d-5929-4c51-89ea-4cef009e5bad)
+```
+arr_time = float(input("Enter the mean inter arrival time of objects from Feeder (in secs): "))
+ser_time = float(input("Enter the mean inter service time of Lathe Machine (in secs): "))
+Robot_time = float(input("Enter the Additional time taken for the Robot (in secs): "))
+
+lam = 1/arr_time
+mu = 1/(ser_time + Robot_time)
+
+print("\n----------------------------------------")
+print("Single Server with Infinite Capacity-(M/M/1):(00/FIFO)")
+print("----------------------------------------")
+
+print("The mean arrival rate per second: %0.2f" % lam)
+print("The mean service rate per second: %0.2f" % mu)
+
+if (lam < mu):
+    Ls = lam/(mu-lam)
+    Lq = Ls - lam/mu
+    Ws = Ls/lam
+    Wq = Lq/lam
+    
+    print("\nAverage number of objects in the system: %0.2f" % Ls)
+    print("Average number of objects in the conveyer: %0.2f" % Lq)
+    print("Average time spent by an object in the system: %0.2f" % Ws)
+    print("Average time spent by an object in the conveyer: %0.2f" % Wq)
+    print("Probability that the system is busy: %0.2f" % (lam/mu))
+    print("Probability that the system is empty: %0.2f" % (1 - lam/mu))
+else:
+    print("\nWarning! Objects overflow will happen in the conveyer")
+
+print("----------------------------------------")
+```
 
 ## Output :
+<img width="916" height="507" alt="image" src="https://github.com/user-attachments/assets/4017d131-275c-4bc9-9c39-03838af2b5ee" />
 
 ## Result :
+
+The average number of material in the system and in the conveyor and waiting time are successfully found.
 
